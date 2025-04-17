@@ -1,0 +1,1 @@
+// Tipo dati per temperatura, umidità, ecc.
