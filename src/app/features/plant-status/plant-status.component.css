@@ -1,15 +1,12 @@
-.status {
-    padding: 1rem;
-    border-radius: 10px;
-    background-color: #f0f9f0;
-    text-align: center;
+:host {
+  display: block;
+  width: 100%;
 }
 
-h2 {
-    font-size: 2rem;
+.card {
+  transition: transform 0.3s ease;
 }
 
-blockquote {
-    font-style: italic;
-    color: #555;
+.card:hover {
+  transform: translateY(-5px);
 }

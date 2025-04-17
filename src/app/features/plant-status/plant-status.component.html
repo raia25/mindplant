@@ -1,5 +1,18 @@
-<div class="status">
-  <h2>{{ mood.emoji }} {{ mood.name }}</h2>
-  <p>{{ mood.description }}</p>
-  <blockquote>{{ mood.message }}</blockquote>
+<div class="card shadow-lg rounded-4 p-4 text-center bg-white border-0">
+  <div class="card-body" *ngIf="mood$ | async as mood">
+    <div class="emoji mb-3">
+      <img 
+        [src]="mood.emoji" 
+        alt="{{ mood.name }}" 
+        class="img-fluid mx-auto d-block"
+        style="max-height: 100px;"
+      />
+    </div>
+
+    <h2 class="card-title fs-4 fw-bold text-dark">{{ mood.name }}</h2>
+
+    <p class="text-muted mb-2">{{ mood.description }}</p>
+
+    <p class="fst-italic text-secondary small">{{ mood.message }}</p>
+  </div>
 </div>
