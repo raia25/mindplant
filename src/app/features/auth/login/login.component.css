@@ -1,0 +1,9 @@
+body {
+    background-color: #f8f9fa;
+  }
+  
+  input:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+  }
+  
