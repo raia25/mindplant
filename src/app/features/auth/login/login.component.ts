@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -17,22 +18,20 @@ export class LoginComponent {
   errorMessage = '';
   loading = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   onLogin() {
-    console.log('Tentativo di login con:', this.email, this.password);
-    this.errorMessage = '';
-    this.loading = true;
-
-    this.authService.login(this.email, this.password).subscribe({
-      next: () => {
-        console.log('Login riuscito, redirigo alla dashboard...');
+    this.http.post('http://localhost:8080/auth/login', {
+      email: this.email,
+      password: this.password
+    }, { responseType: 'text' }).subscribe({
+      next: (token) => {
+        localStorage.setItem('token', token);
         this.router.navigate(['/dashboard']);
       },
       error: (err) => {
-        console.log('Errore login:', err.message);
-        this.errorMessage = err.message;
-        this.loading = false;
+        this.errorMessage = 'Credenziali non valide';
+        console.error(err);
       }
     });
   }
